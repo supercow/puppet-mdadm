@@ -19,6 +19,18 @@ class mdadm::params {
   case $::osfamily {
     'redhat': {
       case $::operatingsystemmajrelease {
+        7: {
+          $raid_check_template = "${module_name}/redhat/raid-check.el7.erb"
+          $raid_check_default_options = {
+            'ENABLED'       => 'yes',
+            'CHECK'         => 'check',
+            'NICE'          => 'low',
+            'CHECK_DEVS'    => '',
+            'REPAIR_DEVS'   => '',
+            'SKIP_DEVS'     => '',
+            'MAXCONCURRENT' => '',
+          }
+        }
         6: {
           $raid_check_template = "${module_name}/redhat/raid-check.el6.erb"
           # note that 'NICE' is el6.x only
